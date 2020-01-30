@@ -1,0 +1,84 @@
+{
+  "name": "react-intercom-hook",
+  "version": "1.0.0",
+  "description": "React hook for Intercom.io",
+  "main": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "start": "npm run storybook",
+    "build": "npm run lint && npm run build:library && npm run build:storybook",
+    "build:library": "rimraf build && tsc && npm run copy-css-to-lib && npm run copy-svg-to-lib && npm run copy-png-to-lib && npm run copy-woff2-to-lib",
+    "build:storybook": "build-storybook -s public",
+    "build:watch": "rimraf build && tsc --watch",
+    "test": "jest --watch",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "storybook": "start-storybook -p 6006",
+    "copy-css-to-lib": "cpx \"./src/**/*.css\" ./build",
+    "copy-woff2-to-lib": "cpx \"./src/**/*.woff2\" ./build",
+    "copy-svg-to-lib": "cpx \"./src/**/*.svg\" ./build",
+    "copy-png-to-lib": "cpx \"./src/**/*.png\" ./build",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reclaim-ai/react-intercom-hook.git"
+  },
+  "keywords": [
+    "react",
+    "react-hooks",
+    "intercom",
+    "intercom.io"
+  ],
+  "author": "Ian White <ian@reclaimai.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reclaim-ai/react-intercom-hook/issues"
+  },
+  "homepage": "https://github.com/reclaim-ai/react-intercom-hook#readme",
+  "peerDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@storybook/addon-actions": "^5.3.3",
+    "@storybook/addon-docs": "^5.3.3",
+    "@storybook/addon-links": "^5.3.3",
+    "@storybook/addons": "^5.3.3",
+    "@storybook/preset-typescript": "^1.2.0",
+    "@storybook/react": "^5.3.3",
+    "@testing-library/jest-dom": "^5.0.2",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/user-event": "^8.1.0",
+    "@types/jest": "^25.1.1",
+    "@types/jsdom": "^12.2.4",
+    "@types/node": "^13.5.2",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "babel-jest": "^25.1.0",
+    "babel-loader": "^8.0.6",
+    "cpx": "^1.5.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-jest-dom": "^2.0.0",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "fork-ts-checker-webpack-plugin": "^4.0.3",
+    "jest": "^25.1.0",
+    "jsdom": "^16.0.1",
+    "react-docgen-typescript-loader": "^3.6.0",
+    "react-test-renderer": "^16.12.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^25.1.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {}
+}
