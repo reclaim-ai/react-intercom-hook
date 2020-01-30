@@ -1,7 +1,26 @@
 {
-  "name": "react-intercom-hook",
+  "name": "@reclaim-ai/react-intercom-hook",
   "version": "1.0.0",
   "description": "React hook for Intercom.io",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/reclaim-ai/react-intercom-hook.git"
+  },
+  "keywords": [
+    "react",
+    "react-hooks",
+    "intercom",
+    "intercom.io"
+  ],
+  "author": "Ian White <ian@reclaimai.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reclaim-ai/react-intercom-hook/issues"
+  },
+  "homepage": "https://github.com/reclaim-ai/react-intercom-hook#readme",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
   "main": "build/index.js",
   "files": [
     "build"
@@ -21,22 +40,6 @@
     "copy-png-to-lib": "cpx \"./src/**/*.png\" ./build",
     "build-storybook": "build-storybook"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/reclaim-ai/react-intercom-hook.git"
-  },
-  "keywords": [
-    "react",
-    "react-hooks",
-    "intercom",
-    "intercom.io"
-  ],
-  "author": "Ian White <ian@reclaimai.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reclaim-ai/react-intercom-hook/issues"
-  },
-  "homepage": "https://github.com/reclaim-ai/react-intercom-hook#readme",
   "peerDependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
