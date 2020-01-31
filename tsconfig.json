@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "build",
+    "outDir": "lib",
     "declaration": true,
     "target": "es5",
     "lib": [
@@ -27,6 +27,6 @@
     "src/**/*.spec.tsx",
     "src/setupTests.tsx",
     "src/stories",
-    "src/*.ts",
+    "src/*.ts"
   ]
 }
