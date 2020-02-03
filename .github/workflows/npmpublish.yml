@@ -14,7 +14,6 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm test
-      - run: npm run build
 
   publish-gpr:
     needs: build
@@ -24,7 +23,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://npm.pkg.github.com/
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+          registry-url: https://npm.pkg.github.com
           scope: '@reclaim-ai'
       - run: npm publish
         env:
