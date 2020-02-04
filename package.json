@@ -23,10 +23,8 @@
     "lib"
   ],
   "scripts": {
-    "start": "npm run storybook",
-    "build": "npm run lint && npm run clean && npm run build:library && npm run build:storybook",
-    "build:library": "rimraf lib && tsc && npm run copy-assets",
-    "build:storybook": "build-storybook -s public",
+    "build": "npm run lint && npm run build:library",
+    "build:library": "rimraf lib && tsc",
     "build:watch": "rimraf lib && tsc --watch",
     "test": "npm run lint && jest --maxWorkers 2",
     "test:watch": "jest --watch",
@@ -34,11 +32,7 @@
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix && npm run prettier",
     "lint:types": "tsc --noEmit",
     "prettier": "prettier --write --config ./.prettierrc \"./src/**/*.{ts,tsx}\"",
-    "storybook": "start-storybook -p 6006",
-    "copy-assets": "cpx \"./src/**/*.{css,woff2,svg,png}\" ./lib",
-    "build-storybook": "build-storybook",
-    "prepublishOnly": "npm run build:library",
-    "clean": "rimraf lib storybook-static"
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": "^16.12.0",
@@ -48,12 +42,6 @@
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
-    "@storybook/addon-actions": "^5.3.10",
-    "@storybook/addon-docs": "^5.3.10",
-    "@storybook/addon-links": "^5.3.10",
-    "@storybook/addons": "^5.3.10",
-    "@storybook/preset-typescript": "^1.2.0",
-    "@storybook/react": "^5.3.10",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.3.2",
     "@testing-library/react-hooks": "^3.2.1",
