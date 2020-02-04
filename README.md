@@ -1,8 +1,8 @@
 # react-intercom-hook
 
-<p align="center">Easy to use [React Hook](https://reactjs.org/docs/hooks-intro.html) for [Intercom](https://www.intercom.com/).</p>
+Easy to use [React Hook](https://reactjs.org/docs/hooks-intro.html) for [Intercom](https://www.intercom.com/).
 
-<p align="center">![NPM Publish](https://github.com/reclaim-ai/react-intercom-hook/workflows/NPM%20Publish/badge.svg)</p>
+![NPM Publish](https://github.com/reclaim-ai/react-intercom-hook/workflows/NPM%20Publish/badge.svg)
 
 ## Install
 ```bash
