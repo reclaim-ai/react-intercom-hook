@@ -1,2 +1,2 @@
-export * from './Intercom';
-export { useIntercom as default } from './useIntercom';
+export * from "./Intercom";
+export { useIntercom as default } from "./useIntercom";

@@ -9,14 +9,14 @@ declare global {
 }
 
 export enum IntercomAlignment {
-  Left = 'left',
-  Right = 'right',
+  Left = "left",
+  Right = "right",
 }
 
 export type IntercomAvatar = {
   type: string;
   image_url: string;
-}
+};
 
 export type IntercomCompany = {
   company_id: string;
@@ -28,7 +28,7 @@ export type IntercomCompany = {
   size?: number;
   website?: string;
   industry?: string;
-}
+};
 
 export type IntercomMessengerAttributes = {
   app_id: string;
@@ -40,7 +40,7 @@ export type IntercomMessengerAttributes = {
   session_duration?: number;
   action_color?: string;
   background_color?: string;
-}
+};
 
 export type IntercomDataAttributes = {
   email?: string;
@@ -62,23 +62,24 @@ export type IntercomDataAttributes = {
   companies?: IntercomCompany[];
 } & { [custom_user_attribute: string]: string | number | boolean | null };
 
-export type IntercomSettings = IntercomMessengerAttributes & IntercomDataAttributes;
+export type IntercomSettings = IntercomMessengerAttributes &
+  IntercomDataAttributes;
 
 export type IntercomCommand =
-  'boot'
-  | 'shutdown'
-  | 'hide'
-  | 'update'
-  | 'show'
-  | 'showNewMessage'
-  | 'showMessages'
-  | 'onHide'
-  | 'onShow'
-  | 'onUnreadCountChange'
-  | 'trackEvent'
-  | 'getVisitorId'
-  | 'startTour'
-  | 'reattach_activator'
+  | "boot"
+  | "shutdown"
+  | "hide"
+  | "update"
+  | "show"
+  | "showNewMessage"
+  | "showMessages"
+  | "onHide"
+  | "onShow"
+  | "onUnreadCountChange"
+  | "trackEvent"
+  | "getVisitorId"
+  | "startTour"
+  | "reattach_activator";
 
 export type IntercomOptions = unknown;
 
@@ -87,40 +88,40 @@ function injectIntercomScript(app_id: string): void {
   const ic = w.Intercom;
   const is = w.intercomSettings;
 
-  if (typeof ic === 'function') {
-    ic('reattach_activator');
-    if (app_id === is.app_id) ic('update', is);
+  if (typeof ic === "function") {
+    ic("reattach_activator");
+    if (app_id === is.app_id) ic("update", is);
     else {
-      ic('shutdown');
-      ic('boot', { ...is, app_id });
+      ic("shutdown");
+      ic("boot", { ...is, app_id });
     }
   } else {
     const d = document;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const i: any = function (...args: unknown[]): void {
+    const i: any = function(...args: unknown[]): void {
       i.c(args);
     };
     i.q = [];
-    i.c = function (args: unknown): void {
+    i.c = function(args: unknown): void {
       i.q.push(args);
     };
 
     w.Intercom = i;
 
-    const l = function (): void {
-      const s = d.createElement('script');
-      s.type = 'text/javascript';
+    const l = function(): void {
+      const s = d.createElement("script");
+      s.type = "text/javascript";
       s.async = true;
       s.src = `https://widget.intercom.io/widget/${app_id}`;
 
-      const x = d.getElementsByTagName('script')[0];
+      const x = d.getElementsByTagName("script")[0];
       if (x?.parentNode) x.parentNode.insertBefore(s, x);
-      else d.getElementsByTagName('head')[0].append(s);
+      else d.getElementsByTagName("head")[0].append(s);
     };
 
-    if (document.readyState === 'complete') l();
-    else if (w.attachEvent) w.attachEvent('onload', l);
-    else w.addEventListener('load', l, false);
+    if (document.readyState === "complete") l();
+    else if (w.attachEvent) w.attachEvent("onload", l);
+    else w.addEventListener("load", l, false);
   }
 }
 
@@ -128,9 +129,14 @@ export class Intercom {
   private static initialized = false;
   private static instance: Intercom;
 
-  static getInstance(settings: IntercomSettings = window.intercomSettings): Intercom {
-    if (!Intercom.instance || (!!settings?.app_id && (Intercom.instance.appId !== settings.app_id))) {
-      if (Intercom.instance?.appId) Intercom.instance.command('shutdown');
+  static getInstance(
+    settings: IntercomSettings = window.intercomSettings
+  ): Intercom {
+    if (
+      !Intercom.instance ||
+      (!!settings?.app_id && Intercom.instance.appId !== settings.app_id)
+    ) {
+      if (Intercom.instance?.appId) Intercom.instance.command("shutdown");
       Intercom.instance = new Intercom(settings);
     }
 
@@ -138,8 +144,10 @@ export class Intercom {
   }
 
   constructor(settings: IntercomSettings) {
-    if (typeof settings !== 'object') {
-      throw new TypeError(`Constructor called with invalid settings type ${typeof settings}, expected IntercomSettings`);
+    if (typeof settings !== "object") {
+      throw new TypeError(
+        `Constructor called with invalid settings type ${typeof settings}, expected IntercomSettings`
+      );
     }
     this.settings = settings;
     if (this.settings.app_id) this.boot();
@@ -147,7 +155,7 @@ export class Intercom {
 
   init(): void {
     if (!this.appId) {
-      throw new Error('Init called with no app_id set');
+      throw new Error("Init called with no app_id set");
     }
 
     if (!Intercom.initialized) {
@@ -159,11 +167,11 @@ export class Intercom {
   boot(settings?: IntercomSettings): void {
     if (settings) this.settings = settings;
     if (!Intercom.initialized) this.init();
-    this.command('boot', this.settings);
+    this.command("boot", this.settings);
   }
 
   destroy(): void {
-    this.command('shutdown');
+    this.command("shutdown");
     delete window.Intercom;
     delete window.intercomSettings;
   }
@@ -184,7 +192,12 @@ export class Intercom {
     try {
       window.Intercom(command, options);
     } catch (err) {
-      console.error('Failed to execute Intercom command', command, options, err);
+      console.error(
+        "Failed to execute Intercom command",
+        command,
+        options,
+        err
+      );
       throw err;
     }
   }
