@@ -1,6 +1,6 @@
 {
   "name": "@reclaim-ai/react-intercom-hook",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React hook for Intercom.io",
   "repository": "git://github.com/reclaim-ai/react-intercom-hook.git",
   "keywords": [
@@ -28,15 +28,16 @@
     "build:library": "rimraf lib && tsc && npm run copy-assets",
     "build:storybook": "build-storybook -s public",
     "build:watch": "rimraf lib && tsc --watch",
-    "test": "jest --maxWorkers 2",
+    "test": "npm run lint && jest --maxWorkers 2",
     "test:watch": "jest --watch",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "lint": "npm run lint:types && eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix && npm run prettier",
     "lint:types": "tsc --noEmit",
+    "prettier": "prettier --write --config ./.prettierrc \"./src/**/*.{ts,tsx}\"",
     "storybook": "start-storybook -p 6006",
     "copy-assets": "cpx \"./src/**/*.{css,woff2,svg,png}\" ./lib",
     "build-storybook": "build-storybook",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build:library",
     "clean": "rimraf lib storybook-static"
   },
   "peerDependencies": {
@@ -75,6 +76,7 @@
     "fork-ts-checker-webpack-plugin": "^4.0.3",
     "jest": "^25.1.0",
     "jsdom": "^16.1.0",
+    "prettier": "^1.19.1",
     "react-docgen-typescript-loader": "^3.6.0",
     "react-test-renderer": "^16.12.0",
     "rimraf": "^3.0.0",

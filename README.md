@@ -1,20 +1,29 @@
 # react-intercom-hook
 
-[React Hook](https://reactjs.org/docs/hooks-intro.html) for [Intercom](https://www.intercom.com/). 
+<p align="center">Easy to use [React Hook](https://reactjs.org/docs/hooks-intro.html) for [Intercom](https://www.intercom.com/).</p>
 
+<p align="center">![NPM Publish](https://github.com/reclaim-ai/react-intercom-hook/workflows/NPM%20Publish/badge.svg)</p>
 
 ## Install
-```
+```bash
 # npm
-npm install @reclaim-ai/react-intercom-hook
+$ npm install @reclaim-ai/react-intercom-hook
 
 # yarn
-yarn add @reclaim-ai/react-intercom-hook
+$ yarn add @reclaim-ai/react-intercom-hook
 ```
 
-## Usage
+## Features
 
-1. Initialize Intercom somewhere near the root of your app, usually in `App.tsx` or `App.jsx`.
+* Inject the global Intercom JS snippet automatically
+* Supports configuring Intercom in React or default global settings
+* Automatically restarts session when app id or user changes
+* Exposes the [Intercom Javascript API](https://developers.intercom.com/installing-intercom/docs/intercom-javascript)
+* Fully Typescript
+
+## Quickstart
+
+1. Initialize Intercom somewhere near the root of your app, usually `App.tsx` or `App.jsx`.
 
 ```typescript
 // App.tsx
@@ -35,7 +44,7 @@ const App: React.FC = () => {
 }
 ```
 
-2. Include the `useIntercom` hook anywhere you want to interact with Intercom.
+2. Include in any child component to interact with the [Intercom Javascript API](https://developers.intercom.com/installing-intercom/docs/intercom-javascript).
 
 ```typescript
 // AppRouter.tsx
