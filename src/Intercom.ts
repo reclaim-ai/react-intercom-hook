@@ -48,7 +48,7 @@ export type IntercomDataAttributes = {
   created_at?: string;
   name?: string;
   phone?: string;
-  last_request_at?: number; // reserved, can't be updated
+  readonly last_request_at?: number; // reserved, can't be updated
   unsubscribed_from_emails?: boolean;
   language_override?: string;
   utm_campaign?: string;
