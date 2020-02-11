@@ -75,6 +75,14 @@ describe("init", () => {
     expect(Intercom.getInstance().appId).toEqual("abc");
     expect(i2.current).toBe(i1.current);
   });
+
+  test("should not throw if command called before init", () => {
+    const { result } = renderHook(() => useIntercom());
+
+    act(() => {
+      expect(() => result.current("update", { email: "dev@reclaimai.com" })).not.toThrow();
+    });
+  });
 });
 
 describe("configuration", () => {

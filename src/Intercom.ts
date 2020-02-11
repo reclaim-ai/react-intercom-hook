@@ -195,6 +195,7 @@ export class Intercom {
         command,
         options
       );
+      return;
     }
 
     try {
