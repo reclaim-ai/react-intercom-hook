@@ -8,10 +8,19 @@ beforeEach(() => {
   delete window.Intercom;
   delete window.intercomSettings;
 
+  // reset static state
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  Intercom.initialized = false;
+
   // mock init method and window.Intercom
   Intercom.prototype.init = jest
     .fn()
     .mockImplementation(function(this: Intercom) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      Intercom.initialized = true;
+
       if (!window.Intercom)
         window.Intercom = jest.fn().mockImplementation(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any

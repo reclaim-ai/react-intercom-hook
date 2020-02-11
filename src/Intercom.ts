@@ -189,6 +189,14 @@ export class Intercom {
   }
 
   command(command: IntercomCommand, options?: IntercomOptions): void {
+    if (!Intercom.initialized) {
+      console.warn(
+        "Intercom not initialized, skipping command",
+        command,
+        options
+      );
+    }
+
     try {
       window.Intercom(command, options);
     } catch (err) {
@@ -198,7 +206,6 @@ export class Intercom {
         options,
         err
       );
-      throw err;
     }
   }
 }
