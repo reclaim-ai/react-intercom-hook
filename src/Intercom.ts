@@ -125,13 +125,24 @@ function injectIntercomScript(app_id: string): void {
   }
 }
 
+// It helps us keep the library isomorphic, i.e. prevent errors when used in a SSR environment
+const _isNotBrowser = typeof window === "undefined" || typeof document === "undefined";
+let notBrowserSettings: IntercomSettings = { app_id: "APP_ID" };
+
 export class Intercom {
   private static initialized = false;
   private static instance: Intercom;
 
   static getInstance(
-    settings: IntercomSettings = window.intercomSettings
+    settings?: IntercomSettings
   ): Intercom {
+    if (_isNotBrowser) {
+      Intercom.instance = new Intercom(notBrowserSettings);
+      return Intercom.instance;
+    }
+
+    if (!settings) settings = window.intercomSettings;
+
     if (
       !Intercom.instance ||
       (!!settings?.app_id && Intercom.instance.appId !== settings.app_id)
@@ -154,6 +165,8 @@ export class Intercom {
   }
 
   init(): void {
+    if (_isNotBrowser) return;
+
     if (!this.appId) {
       throw new Error("Init called with no app_id set");
     }
@@ -165,22 +178,33 @@ export class Intercom {
   }
 
   boot(settings?: IntercomSettings): void {
+    if (_isNotBrowser) return;
+
     if (settings) this.settings = settings;
     if (!Intercom.initialized) this.init();
     this.command("boot", this.settings);
   }
 
   destroy(): void {
+    if (_isNotBrowser) return;
+
     this.command("shutdown");
     delete window.Intercom;
     delete window.intercomSettings;
   }
 
   get settings(): IntercomSettings {
+    if (_isNotBrowser) return notBrowserSettings;
+
     return window.intercomSettings;
   }
 
   set settings(settings: IntercomSettings) {
+    if (_isNotBrowser) {
+      notBrowserSettings = settings;
+      return;
+    }
+  
     window.intercomSettings = settings;
   }
 
@@ -189,6 +213,8 @@ export class Intercom {
   }
 
   command(command: IntercomCommand, options?: IntercomOptions): void {
+    if (_isNotBrowser) return;
+
     if (!Intercom.initialized) {
       console.warn(
         "Intercom not initialized, skipping command",
