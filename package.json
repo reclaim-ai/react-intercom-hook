@@ -1,6 +1,6 @@
 {
   "name": "@reclaim-ai/react-intercom-hook",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "React hook for Intercom.io",
   "repository": "git://github.com/reclaim-ai/react-intercom-hook.git",
   "keywords": [

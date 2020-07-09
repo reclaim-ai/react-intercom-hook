@@ -18,7 +18,7 @@ export const useIntercom = (
       undefined !== intercom.settings[attr] &&
       settings[attr] !== intercom.settings[attr];
 
-    if (!!intercom.appId && ["app_id", "user_id", "email"].some(isChanged)) {
+    if (!!intercom.appId && ["app_id", "user_id", "email", "language_override"].some(isChanged)) {
       // app_id or user changed, restart session
       intercom.command("shutdown");
       if (settings.app_id) intercom.boot(settings);
